@@ -6,6 +6,17 @@ class User < ActiveRecord::Base
 
   devise :omniauthable, :omniauth_providers => [:facebook]
 
+  has_many :restaurants
+
+  has_many :reviews
+
+  has_many :reviewed_restaurants, through: :reviews, source: :restaurant
+
+  def has_reviewed?(restaurant)
+    p reviewed_restaurants
+    reviewed_restaurants.include?(restaurant)
+  end
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
