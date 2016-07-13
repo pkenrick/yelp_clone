@@ -26,6 +26,13 @@ feature 'Restaurants' do
 
   context 'creating restaurants' do
 
+    scenario 'does not allow a user to add a restaurant if not logged in' do
+      visit '/restaurants'
+      click_link 'Add a restaurant'
+      expect(page).to have_content('You need to sign in or sign up before continuing')
+      expect(current_path).to eq('/users/sign_in')
+    end
+
     scenario 'prompts a user to add a new restaurant, then displays the restaurant' do
       visit '/restaurants'
       click_link 'Add a restaurant'
