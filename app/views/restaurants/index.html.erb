@@ -7,6 +7,7 @@
     <%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %><br>
     <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %><br>
     
+
     <% restaurant.reviews.all.each do |review| %>
     Thoughts: <%= review.thoughts %> | Rating: <%= review.rating %><br>
     <% end %><br>
