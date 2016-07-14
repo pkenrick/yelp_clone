@@ -104,10 +104,12 @@ feature 'Restaurants' do
 
   context 'deleting retaurants' do
 
-    before { Restaurant.create(name: 'KFC', description: 'Deep friend goodness') }
+    before { 
+      sign_up
+      Restaurant.create name: 'KFC', description: 'Deep friend goodness', user_id: User.last.id 
+    }
 
     scenario 'let a user delete a restaurant' do
-      sign_up
       visit '/restaurants'
       click_link 'Delete KFC'
       expect(page).not_to have_content('KFC')

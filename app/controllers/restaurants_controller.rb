@@ -28,11 +28,9 @@ class RestaurantsController < ApplicationController
 
   def edit
     @restaurant = Restaurant.find(params[:id])
-    if different_user
+    unless @restaurant.belongs_to?(current_user)
       flash.keep[:notice] = 'You cannot edit restaurant you did not create'
       redirect_to '/restaurants'
-    else
-      render 'edit'
     end
   end
 
@@ -44,8 +42,12 @@ class RestaurantsController < ApplicationController
 
   def destroy
     @restaurant = Restaurant.find(params[:id])
-    @restaurant.destroy
-    flash[:notice] = 'Restaurant deleted successfully'
+    if @restaurant.belongs_to?(current_user)
+      @restaurant.destroy
+      flash.keep[:notice] = 'Restaurant deleted successfully'
+    else
+      flash.keep[:notice] = 'You cannot delete restaurant you did not create'
+    end
     redirect_to '/restaurants'
   end
 
@@ -54,11 +56,5 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params.require(:restaurant).permit(:name, :description)
   end
-
-  def different_user
-    @restaurant = Restaurant.find(params[:id])
-    current_user.id != @restaurant.user_id
-  end
-
 
 end
