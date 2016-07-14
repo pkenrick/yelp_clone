@@ -9,7 +9,6 @@ class Restaurant < ActiveRecord::Base
   def build_review(review_params = {}, current_user)
     review = reviews.build(review_params)
     review.user = current_user
-
     review
   end
 
