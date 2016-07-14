@@ -1,5 +1,7 @@
 class Restaurant < ActiveRecord::Base
 
+  extend WithUserAssociationExtension
+
   validates :name, length: { minimum: 3 }, uniqueness: true
 
   has_many :reviews,

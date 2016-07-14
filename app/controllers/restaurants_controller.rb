@@ -3,7 +3,6 @@ class RestaurantsController < ApplicationController
   before_action :authenticate_user!, :except => [:index, :show]
   # before_action :check_user, :except => [:index, :show]
 
-
   def index
     @restaurants = Restaurant.all
   end
@@ -13,8 +12,13 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.user_id = current_user.id
+    # @restaurant = Restaurant.find(params[:restaurant_id])
+    # @review = @restaurant.reviews.build_with_user(review_params, current_user)
+
+      @restaurant = Restaurant.create_with_user(restaurant_params, current_user)
+
+    # @restaurant = Restaurant.new(restaurant_params)
+    # @restaurant.user_id = current_user.id
     if @restaurant.save
       redirect_to '/restaurants'
     else
