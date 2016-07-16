@@ -36,3 +36,14 @@ describe 'reviews' do
   end
 
 end
+
+describe '#average_rating' do
+
+  it 'returns the average rating of all the restaurant\'s reviews' do
+    restaurant = Restaurant.create(name: 'KFC')
+    restaurant.reviews.create(thoughts: 'ok', rating: '4')
+    restaurant.reviews.create(thoughts: 'not so good', rating: '2')
+    expect(restaurant.average_rating).to eq(3.0)
+  end
+
+end

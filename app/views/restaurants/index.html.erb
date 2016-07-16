@@ -1,16 +1,51 @@
+<html>
+<head>
+  <title>YelpClone</title>
+</head>
+  
+<div id='heading'>Welcome to YelpClone!</div>
+
+<body>
+
+<a href='/restaurants/new' id='addRestaurantButton'>Add a restaurant</a>
+
+
 <% if @restaurants.any? %>
   
   <% @restaurants.each do |restaurant| %>
-    <h2><%= link_to restaurant.name, restaurant_path(restaurant) %></h2>
-    <div id='description'><%= restaurant.description %></div><br>
-    <%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %><br>
-    <%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %><br>
-    <%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %><br>
     
+    <section id='restaurantContainer'>
 
-    <% restaurant.reviews.all.each do |review| %>
-    Thoughts: <%= review.thoughts %> | Rating: <%= review.rating %><br>
-    <% end %><br>
+      <div id='container1'>
+
+      <div id='restaurantHeading'>
+        <span id='restaurantName'><%= link_to restaurant.name, restaurant_path(restaurant) %></span> <span>(Average rating: <%= sprintf('%.1f', restaurant.average_rating) %>)</span> %#9824 &#
+      </div>
+      
+      <div id='description'>"<%= restaurant.description %>"</div>
+      
+      <div id='restaurantLinks'>
+        <span class='restaurantLinks'><%= link_to "Edit #{restaurant.name}", edit_restaurant_path(restaurant) %></span>
+        <span class='restaurantLinks'><%= link_to "Delete #{restaurant.name}", restaurant_path(restaurant), method: :delete %></span>
+        <span class='restaurantLinks'><%= link_to "Review #{restaurant.name}", new_restaurant_review_path(restaurant) %></span>
+      </div>
+
+      </div>
+
+      <div id='container2'>
+
+      <div id='latestReviews'>
+        Latest 3 reviews for this restaurant:<br>
+        <% restaurant.reviews.last(3).each do |review| %>
+          - <span class='review'>"<%= review.thoughts %>" | Rating: <%= review.rating %></span><br>
+        <% end %>
+      </div>
+
+      </div>
+
+      <div id='floatClearer'></div>
+
+    </section>
   
   <% end %>
 
@@ -20,5 +55,9 @@
 
 <% end %>
 
-<a href='/restaurants/new'>Add a restaurant</a>
+</body>
+</html>
+
+
+
 

@@ -14,6 +14,11 @@ class Restaurant < ActiveRecord::Base
     user == current_user
   end
 
+  def average_rating
+    ratings = reviews.map{|review| review.rating}
+    ratings.reduce(:+).to_f / ratings.length
+  end
+
   # def build_review(review_params = {}, current_user)
   #   review = reviews.build(review_params)
   #   review.user = current_user

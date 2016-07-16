@@ -1,0 +1,72 @@
+html {
+  background-color: powderblue;
+  font-family: 'Slabo 27px', serif;
+}
+
+#facebookButtons {
+  float: left;
+}
+
+.signingButtons {
+  float: right;
+  margin: 0 5px;
+}
+
+#floatClearer {
+  clear: both;
+}
+
+.notice, .alert {
+  color: red;
+}
+
+#heading {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  color: royalblue;
+}
+
+#addRestaurantButton {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+}
+
+#restaurantContainer {
+  border: solid;
+  margin: 5px;
+}
+
+#restaurantName {
+  color: royalblue;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#restaurantHeading, .restaurantLinks, #latestReviews {
+  display: inline-block;
+  margin: 5px;
+}
+
+#description {
+  font-style: italic;
+  margin: 5px;
+}
+
+#container1 {
+  width: 50%;
+  float: left;
+}
+
+#container2 {
+  width: 50%;
+  float: right;
+}
+
+.review {
+  font-style: italic;
+}
+
+
+
